@@ -3,6 +3,7 @@ package controller;
 import java.io.BufferedReader;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.util.Arrays;
 
 public class RedesController {
 	
@@ -22,6 +23,7 @@ public class RedesController {
 	public void ip(String ipconfig) {
 		
 		String os = System.getProperty("os.name");
+		String[] nomeAdaptador = new String[0];
 		
 		if(os.contains("Windows")) {
 			ipconfig = "IPCONFIG";
@@ -39,9 +41,19 @@ public class RedesController {
 			String linha = buffer.readLine();
 			
 			while (linha != null) {
-				if(linha.contains("IPv4")) { //Verificar para retornar adaptador tambem
-					System.out.println(linha);
-				} linha = buffer.readLine();
+				
+				if(linha.contains("Adaptador")) {
+					nomeAdaptador = linha.split(":");
+					
+				} 
+				if (linha.contains("IPv4")) {
+					String[] enderecoip = linha.split(":");
+					System.out.println(Arrays.toString(nomeAdaptador));
+					System.out.println(Arrays.toString(enderecoip));
+				}
+				
+				
+				linha = buffer.readLine();
 			}
 			
 			buffer.close();
