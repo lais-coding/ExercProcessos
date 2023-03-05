@@ -13,7 +13,8 @@ public class RedesController {
 	
 	//1 - Verificar Sistema Operacional
 	
-	public String os() { //mudar para private
+	
+	private String os() { //mudar para private
 		String os = System.getProperty("os.name");
 		return os;
 	}
@@ -24,7 +25,7 @@ public class RedesController {
 		
 		String os = System.getProperty("os.name");
 		String[] nomeAdaptador = new String[0];
-		
+	
 		if(os.contains("Windows")) {
 			ipconfig = "IPCONFIG";
 		}
@@ -71,6 +72,8 @@ public class RedesController {
 		public void ping(String pingprocesso) {
 			
 			String os = System.getProperty("os.name");
+			String [] media = new String [0];
+			
 			
 			if(os.contains("Windows")) {
 				pingprocesso = "PING -4 -n 10 www.google.com.br";
@@ -88,15 +91,20 @@ public class RedesController {
 				String linha = buffer.readLine();
 				
 				while(linha != null) {
-					if(linha.contains("M�dia")){ //Tratar para exibir SOMENTE o tempo médio
-						System.out.println(linha);
+				
+					if(linha.contains("M�dia")) {
+						media = linha.split(",");
+						System.out.println((media[2]));
 					}
+						
+					
 					linha = buffer.readLine();
 				}
 				
 				buffer.close();
 				ler.close();
 				dados.close();
+				
 			} catch (Exception e1) {
 				e1.printStackTrace();
 			}
