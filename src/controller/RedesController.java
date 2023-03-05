@@ -14,7 +14,7 @@ public class RedesController {
 	//1 - Verificar Sistema Operacional
 	
 	
-	private String os() { //mudar para private
+	private String os() { 
 		String os = System.getProperty("os.name");
 		return os;
 	}
